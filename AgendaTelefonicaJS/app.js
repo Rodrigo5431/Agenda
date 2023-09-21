@@ -12,7 +12,8 @@ function agenda() {
    let email;
    let contador = 1;
    let id;
-   // let ativo = true;
+   let listaDeFavoritos = [];
+   let resposta
 
    function adicionarContato() {
 
@@ -23,48 +24,86 @@ function agenda() {
       email = prompt("Digite o e-mail do contato");
       contatoNovo = [id, nome, numero, dataNasc, email];
       lista.push(contatoNovo);
-      alert("Contato Salvo");
+      resposta = prompt(" Deseja adicionar a lista de favoritos? \n1. Sim \n2.Não");
+      if (resposta == 1) {
+         listaDeFavoritos.push(contatoNovo);
+         alert(`Sua lista de favoritos! \n${listaDeFavoritos.join("\n")}`);
+
+      } else {
+         alert("Contato Salvo");
+      }
    }
 
    function listarContatos() {
-      alert(lista.join("\n"));
+      alert(`Sua lista de contatos! ${lista.join("\n")}`);
+   }
+   function listarFavoritos() {
+      alert(`Sua lista de favoritos! \n${listaDeFavoritos.join("\n")}`);
    }
 
    function excluirContato() {
-      let escolha = prompt("Contato que deseja excluir" + listarContatos());
-      lista.splice(escolha -1, 1);
-      
+      let escolha = prompt(`Contato que deseja excluir: \n${lista.join("\n")}`);
+      lista.splice(escolha - 1, 1);
+
    }
-   
-   
-   
-   while (select != 4) {
-      select = parseInt(prompt("Agenda telefônica!! \n \n1. Adicionar Novo Contato \n2. Exibir Lista \n3. Excluir Contato "));
-      
+
+   function adicionarFavoritos() {
+      let escolhaF = prompt(`Quem você deseja adiconar aos favoritos?\n\n${lista.join("\n")}`);
+      let contatoSelecionado = lista[escolhaF - 1];
+      listaDeFavoritos.push(contatoSelecionado);
+      alert(`Sua lista de favoritos! \n${listaDeFavoritos.join("\n")}`);
+   }
+   function editarContato() {
+      let edicao = prompt(`Qual contato deseja editar?\n \n${lista.join("\n")}`);
+      let selecionado = lista;
+      selecionado.splice(edicao -1, 1);
+      id = contador++;
+      nome = prompt("Digite o nome do contato");
+      dataNasc = prompt("Digite a data de nascimento");
+      numero = prompt("Telefone do contato");
+      email = prompt("Digite o e-mail do contato");
+      contatoNovo = [id, nome, numero, dataNasc, email];
+      lista.push(contatoNovo);
+      listaDeFavoritos.push(contatoNovo);
+      listarContatos();
+
+   }
+
+
+   while (select != 6) {
+      select = parseInt(prompt("Agenda telefônica!! \n \n1. Adicionar Novo Contato \n2. Editar Contato \n3. Excluir Contato \n4. Adicionar Favoritos \n5. Lista de Contatos \n6. Lista de Favoritos"));
+
       switch (select) {
          case 1:
             adicionarContato();
             break;
-            case 2:
-               listarContatos();
-               break;
-               
-               case 3:
-                  excluirContato();
-                  break;
-                  
-                  
-                  default:
-                     alert("Opção inválida, escolha uma opção válida");
-                     agenda();
-                  }
-               }
-               
-               
-            }
-            // resposta = "";
-            // for(let i=0; i < lista.length; i++){
-            //    contato = lista[i];
-            //    resposta = resposta + (`${i+1}- ${contato[0]}`) + "\n";
+
+         case 2:
+            editarContato();
+            break;
+
+         case 3:
+            excluirContato();
+            break;
+
+         case 4:
+            adicionarFavoritos();
+            break;
+
+         case 5:
+            listarContatos();
+            break;
+
+         case 6:
+            listarFavoritos();
+            break;
+
+
+         default:
+            alert("Opção inválida, escolha uma opção válida");
             agenda();
-            
+      }
+   }
+}
+
+agenda();
