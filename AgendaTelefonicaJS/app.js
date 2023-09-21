@@ -12,7 +12,7 @@ function agenda() {
    let email;
    let contador = 1;
    let id;
-   let ativo = true;
+   // let ativo = true;
 
    function adicionarContato() {
 
@@ -32,7 +32,7 @@ function agenda() {
 
    function excluirContato() {
       let escolha = prompt("Contato que deseja excluir" + listarContatos());
-      lista.splice(escolha);
+      lista.splice(escolha -1, 1);
       
    }
    
