@@ -14,6 +14,16 @@ function agenda() {
    let id;
    let listaDeFavoritos = [];
    let resposta
+ 
+function buscarPorNome() {
+        busca = prompt("Digite o nome a pesquisar");
+        let contatoNome = lista.filter(busca => busca.contatoNome < lista.length)
+        alert(contatoNome);
+      }
+
+function buscaTeste() {
+   buscarPorNome();
+}
 
    function adicionarContato() {
 
@@ -35,7 +45,7 @@ function agenda() {
    }
 
    function listarContatos() {
-      alert(`Sua lista de contatos! ${lista.join("\n")}`);
+      alert(`Sua lista de contatos! \n${lista.join("\n")}`);
    }
    function listarFavoritos() {
       alert(`Sua lista de favoritos! \n${listaDeFavoritos.join("\n")}`);
@@ -55,8 +65,11 @@ function agenda() {
    }
    function editarContato() {
       let edicao = prompt(`Qual contato deseja editar?\n \n${lista.join("\n")}`);
+      let edicaoFavoritos = edicao;
       let selecionado = lista;
+      let selecionadoFavorito = listaDeFavoritos;
       selecionado.splice(edicao -1, 1);
+      selecionadoFavorito.splice(edicaoFavoritos -1, 1);
       id = contador++;
       nome = prompt("Digite o nome do contato");
       dataNasc = prompt("Digite a data de nascimento");
@@ -66,11 +79,12 @@ function agenda() {
       lista.push(contatoNovo);
       listaDeFavoritos.push(contatoNovo);
       listarContatos();
+      listarFavoritos();
 
    }
 
 
-   while (select != 6) {
+   while (select != 8) {
       select = parseInt(prompt("Agenda telefônica!! \n \n1. Adicionar Novo Contato \n2. Editar Contato \n3. Excluir Contato \n4. Adicionar Favoritos \n5. Lista de Contatos \n6. Lista de Favoritos"));
 
       switch (select) {
@@ -98,6 +112,9 @@ function agenda() {
             listarFavoritos();
             break;
 
+            case 7 :
+               buscaTeste();
+               break;
 
          default:
             alert("Opção inválida, escolha uma opção válida");
