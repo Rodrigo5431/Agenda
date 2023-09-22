@@ -1,39 +1,24 @@
 function agenda() {
    let contatoNovo;
-   let lista = [
-      ["Rodrigo Coutinho", "(24) 99999-9999", "3000798", "aaaaa@sdsfsdaf"],
-      ["Rodrigo Lima", "(24) 88888 8888", "484664", "dfssfd@jhglglhk"],
-      ["Lucas Lima", "(21) 77777 7171", "466556", "gsdfghf@jhk"]
-   ];
+   let lista = [];
+   let listaDeFavoritos = [];
    let select;
    let nome;
    let dataNasc;
    let numero;
    let email;
-   let contador = 1;
-   let id;
-   let listaDeFavoritos = [];
    let resposta
  
-function buscarPorNome() {
-        busca = prompt("Digite o nome a pesquisar");
-        let contatoNome = lista.filter(busca => busca.contatoNome < lista.length)
-        alert(contatoNome);
-      }
-
-function buscaTeste() {
-   buscarPorNome();
-}
-
    function adicionarContato() {
 
-      id = contador++;
+     
       nome = prompt("Digite o nome do contato");
       dataNasc = prompt("Digite a data de nascimento");
       numero = prompt("Telefone do contato");
       email = prompt("Digite o e-mail do contato");
-      contatoNovo = [id, nome, numero, dataNasc, email];
+      contatoNovo = [nome, numero, dataNasc, email];
       lista.push(contatoNovo);
+      alert(`Sua lista de contatos! \n${lista.join("\n")}`);
       resposta = prompt(" Deseja adicionar a lista de favoritos? \n1. Sim \n2.Não");
       if (resposta == 1) {
          listaDeFavoritos.push(contatoNovo);
@@ -58,29 +43,26 @@ function buscaTeste() {
    }
 
    function adicionarFavoritos() {
-      let escolhaF = prompt(`Quem você deseja adiconar aos favoritos?\n\n${lista.join("\n")}`);
+      let escolhaF = prompt(`Quem você deseja adicionar aos favoritos?\n\n${lista.join("\n")}`);
       let contatoSelecionado = lista[escolhaF - 1];
       listaDeFavoritos.push(contatoSelecionado);
       alert(`Sua lista de favoritos! \n${listaDeFavoritos.join("\n")}`);
    }
    function editarContato() {
       let edicao = prompt(`Qual contato deseja editar?\n \n${lista.join("\n")}`);
-      let edicaoFavoritos = edicao;
       let selecionado = lista;
       let selecionadoFavorito = listaDeFavoritos;
-      selecionado.splice(edicao -1, 1);
-      selecionadoFavorito.splice(edicaoFavoritos -1, 1);
-      id = contador++;
+      selecionado.splice(edicao -1, 1) || selecionado.splice(edicao);
+      selecionadoFavorito.splice(edicao -1, 1) || selecionadoFavorito.splice(edicao);
       nome = prompt("Digite o nome do contato");
       dataNasc = prompt("Digite a data de nascimento");
       numero = prompt("Telefone do contato");
       email = prompt("Digite o e-mail do contato");
-      contatoNovo = [id, nome, numero, dataNasc, email];
+      contatoNovo = [nome, numero, dataNasc, email];
       lista.push(contatoNovo);
       listaDeFavoritos.push(contatoNovo);
       listarContatos();
       listarFavoritos();
-
    }
 
 
